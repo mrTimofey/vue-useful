@@ -1,0 +1,27 @@
+.modal
+	overflow auto
+	fixed 0
+	z-index 15
+	color white
+	backface-visibility hidden
+	opacity 1
+	background rgba(black, 0.9)
+	> .inner
+		display block
+		margin 160px auto 80px auto
+		position relative
+		max-width 600px
+		padding 0 1em
+.modal-close
+	&:before
+		content 'x'
+.modal-enter-active
+	opacity 1
+	transition opacity 0.2s ease-out
+	.inner, .modal-close
+		transform none
+		transition transform 0.2s ease-out
+.modal-enter
+	opacity 0
+	.inner, .modal-close
+		transform scale(0.98) translateY(-15px)
