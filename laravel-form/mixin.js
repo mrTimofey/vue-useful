@@ -1,6 +1,6 @@
 import http from 'axios';
-import { formatValidationResponse } from '../../utils';
-import validationMessages from './ru';
+import { formatValidationResponse } from '../utils';
+import validationMessages from './validation/ru';
 
 export default {
 	data: () => ({

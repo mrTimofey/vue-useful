@@ -1,4 +1,6 @@
 /*
+Russian translation for Laravel client-side validation messages.
+
 {
     name,
 	title ?= name,

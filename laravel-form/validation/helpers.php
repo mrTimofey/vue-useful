@@ -1,4 +1,7 @@
 <?php
+/**
+ * Helpers for Laravel to useful with a Vue frontend.
+ */
 
 use Illuminate\Contracts\Validation\Factory as ValidatorFactory;
 use Illuminate\Http\JsonResponse;
