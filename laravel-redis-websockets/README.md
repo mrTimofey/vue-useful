@@ -26,5 +26,16 @@ Use client code
 ```javascript
 import Echo from 'laravel-echo';
 
-const echo = new Echo({ broadcaster: 'socket.io' });
+// just for example
+let token = window.localStorage.authToken;
+
+const echo = new Echo({
+    broadcaster: 'socket.io',
+    host: 'scheme://host:port',
+    auth: {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }
+});
 ```
