@@ -10,9 +10,8 @@ const $modal = {
 
 Object.defineProperty($modal, 'masterComponent', {
 	set(comp) {
-		if (process.env.NODE_ENV !== 'production')
-			if (window && this._masterComponent)
-				throw new Error('Vue modal plugin: there must only one modal instance (trying to create a second instance)');
+		if (this._masterComponent)
+			throw new Error('Vue modal plugin: there must only one modal instance (trying to create a second instance)');
 		this._masterComponent = comp;
 	},
 	get() {

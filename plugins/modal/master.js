@@ -1,5 +1,3 @@
-let clickInside = false;
-
 export default {
 	props: {
 		tag: String,
@@ -14,40 +12,46 @@ export default {
 	},
 	data: () => ({
 		comp: null,
-		compProps: null
+		compProps: null,
+		size: null
 	}),
 	methods: {
-		openModal(name, props) {
+		openModal(name, props, size) {
 			if (!name) throw new Error('Vue modal plugin: can not open undefined modal');
+			this.size = typeof size === 'string' ? size : null;
 			this.$emit('before-open', { comp: name, compProps: props });
 			this.comp = name;
 			this.compProps = props;
 			this.$emit('opened', this.$data);
 			return new Promise(resolve => {
-				this.$once('before-close', data => resolve(data));
+				this.$once('closed', result => resolve(result));
 			});
 		},
-		close() {
-			if (clickInside) {
-				clickInside = false;
-				return;
-			}
+		close(result) {
 			this.$emit('before-close', this.$data);
-			this.comp = null;
-			this.compProps = null;
-			this.$emit('closed');
+			this.$nextTick(() => {
+				this.comp = null;
+				this.compProps = null;
+				this.$emit('closed', result);
+			});
 		}
 	},
 	created() {
+		this.clickInside = false;
 		this.$modal.masterComponent = this;
 	},
 	render(h) {
 		return this.comp && h(
 			this.tag || this.$vnode.data.tag || 'div',
-			{
-				class: 'modal-' + this.comp,
-				on: { click: this.close }
-			},
+			{ on: {
+				click: () => {
+					if (this.clickInside) {
+						this.clickInside = false;
+						return;
+					}
+					this.close();
+				}
+			} },
 			[
 				this.$slots.before,
 				h(
@@ -55,7 +59,9 @@ export default {
 					{
 						class: this.innerClass,
 						on: {
-							click() { clickInside = true; }
+							click: () => {
+								this.clickInside = true;
+							}
 						}
 					},
 					[

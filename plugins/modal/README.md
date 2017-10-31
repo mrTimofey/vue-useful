@@ -5,3 +5,6 @@ How to use:
 3) Set `MasterComponent.components` with an object containing your modal window components.
 4) Add styles for your modal overlay and modal window.
 5) Use with `this.$modal.open(componentName, props)` and `this.$modal.close()` from any component within your application.
+
+`this.$modal.open` returns a promise.
+To pass arguments to `resolve` call `this.$modal.close(resolveData)` within your modal component.
