@@ -3,8 +3,8 @@ const $modal = {
 	open(name, props) {
 		return this._masterComponent.openModal(name, props);
 	},
-	close() {
-		this._masterComponent.close();
+	close(result) {
+		this._masterComponent.close(result);
 	}
 };
 
