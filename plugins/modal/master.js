@@ -23,6 +23,9 @@ export default {
 			this.comp = name;
 			this.compProps = props;
 			this.$emit('opened', this.$data);
+			return new Promise(resolve => {
+				this.$once('before-close', data => resolve(data));
+			});
 		},
 		close() {
 			if (clickInside) {

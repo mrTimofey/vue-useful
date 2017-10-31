@@ -1,7 +1,7 @@
 import MasterComponent from './master';
 const $modal = {
 	open(name, props) {
-		this._masterComponent.openModal(name, props);
+		return this._masterComponent.openModal(name, props);
 	},
 	close() {
 		this._masterComponent.close();
