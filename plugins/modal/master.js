@@ -59,7 +59,10 @@ export default {
 					{
 						class: this.innerClass,
 						on: {
-							click: () => {
+							mousedown: () => {
+								this.clickInside = true;
+							},
+							mouseup: () => {
 								this.clickInside = true;
 							}
 						}
